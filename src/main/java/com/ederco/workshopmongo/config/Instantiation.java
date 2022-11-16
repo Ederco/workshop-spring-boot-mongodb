@@ -3,6 +3,7 @@ package com.ederco.workshopmongo.config;
 import com.ederco.workshopmongo.domain.Post;
 import com.ederco.workshopmongo.domain.User;
 import com.ederco.workshopmongo.dto.AuthorDTO;
+import com.ederco.workshopmongo.dto.CommentDTO;
 import com.ederco.workshopmongo.repository.PostRepository;
 import com.ederco.workshopmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,13 @@ public class Instantiation implements CommandLineRunner {
                 "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
         Post post2 = new Post(null, sdf.parse("20/01/2021"), "Bom dia",
                 "Acordei feliz hoje!", new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano !", sdf.parse("21/09/2018"), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite !", sdf.parse("27/03/2018"), new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia !", sdf.parse("01/11/2018"), new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(c1 ,c2));
+        post2.getComments().addAll(Arrays.asList(c3));
 
         postRepository.saveAll(Arrays.asList(post1,post2));
 
